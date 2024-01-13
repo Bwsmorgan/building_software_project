@@ -1,13 +1,13 @@
-github_api_token: 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
+github_api_token: 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
 
-plot_color:
+plot_color: red
 
-plot_title:
+plot_title: plots
 
-plot_x_axis_title:
+plot_x_axis_title: x-axis
 
-plot_y_axis_title:
+plot_y_axis_title: y-axis
 
-figure_size:
+figure_size: 
 
 default_save_path:

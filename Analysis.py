@@ -3,6 +3,8 @@ import yaml
 import argparse
 import requests
 import logging
+import pprint
+import base64
 
 logging.basicConfig(level=logging.DEBUG, filename='logging.log')
 
@@ -49,16 +51,16 @@ class Analysis:
         config = {}
 
         for path in paths_to_load:
-            print('Loading...' + path)
+            print(f'Loading... {path}\n')
             with open(path, 'r') as f:
                 self.this_config = yaml.safe_load(f)
 
             config.update(self.this_config)
 
-        print(self.this_config)
+            print(f'{self.this_config} \n')
 
 
-    def load_data(self) -> None:
+    def load_data(self):
 
         ''' Retrieve data from the GitHub API
 
@@ -75,29 +77,46 @@ class Analysis:
 
         '''
         
-        print(self.this_config)
+        print(f'{self.this_config} \n')
 
         #we retrieve our github api token from our config file and set its value to a unique variable
         token = self.this_config.get('github_api_token')
 
-        url = 'https://api.github.com/user'
+        owner = 'Bwsmorgan'
+        repo = 'building_software_project'
+
+        url = 'https://api.github.com/repos/Bwsmorgan/building_software_project/contents/configs/job_config.yml'
+        # url_2 = "https://api.github.com/user/'building_software_project'/contents/'/configs/system_config.yml'"
         headers = {'Authorization': 'Bearer ' + token}
         
-
         try:
             #get response from first API
-            r = requests.get(url, headers=headers)
+            response = requests.get(url, headers=headers)
             print('success from first API.')
 
         except requests.exceptions.ConnectionError:
             print('Connection Error from first API.')
             #connection error to first API. Try Second
-            r = requests.get(url, headers=headers)
+            response = requests.get(url, headers=headers)
             print('success from second API.')
 
-        print(r) 
+        response_json = json.loads(response.text)
+      
+
+        print(f'{response.status_code}\n') 
+        print(f'{response_json}\n')
+        print(response_json['content'])
+
+        file_content_encoding = response_json.get('encoding')
+
+        if file_content_encoding == 'base64':
+            file_content = base64.b64decode(response_json['content']).decode()
+        
+        print(file_content)
         print(token)
 
+        return response_json
+        # print(self.analysis_config['github_api_token'])
     
 
 obj_1 = Analysis()
