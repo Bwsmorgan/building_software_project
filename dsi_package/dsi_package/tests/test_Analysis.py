@@ -1,5 +1,4 @@
 from Analysis import Analysis
-# import pytest
 import random
 
 def test_compute_analysis():
@@ -15,7 +14,7 @@ def test_compute_analysis():
 
     sum_of_figure_size = 0
 
-    #for each config we create a random figure size and calculate the mean value of all 3 figure sizes 
+    #for each config we create a random figure_size value and calculate the mean value of all 3 figure sizes 
     for config in list_of_configs:
         new_figure_size = random.randint(1, 10)
         config['figure_size'] = new_figure_size
@@ -26,10 +25,6 @@ def test_compute_analysis():
     exp_output = median_figure_size
     
     actual_output = analysis_obj1.compute_analysis()
-    print('actual output')
-    print(actual_output)
-    print('expected input')
-    print(exp_output)
     assert actual_output == exp_output
 
-test_compute_analysis()
+# test_compute_analysis()
