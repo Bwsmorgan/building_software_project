@@ -1,13 +1,13 @@
-github_api_token: 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
+github_api_token: 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
 
 plot_color: red
 
-plot_title: plots
+plot_title: 'job plot'
 
-plot_x_axis_title: x-axis
+plot_x_axis_title: 'job x-axis'
 
-plot_y_axis_title: y-axis
+plot_y_axis_title: 'job y-axis'
 
-figure_size: 
+figure_size: 100
 
 default_save_path:

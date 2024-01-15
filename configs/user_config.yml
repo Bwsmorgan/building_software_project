@@ -1,13 +1,13 @@
 github_api_token:
 
-plot_color:
+plot_color: green
 
-plot_title:
+plot_title: 'user plot'
 
-plot_x_axis_title:
+plot_x_axis_title: 'user x-axis'
 
-plot_y_axis_title:
+plot_y_axis_title: 'user y-axis'
 
-figure_size:
+figure_size: 100
 
 default_save_path:

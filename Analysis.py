@@ -48,16 +48,18 @@ class Analysis:
 
         paths_to_load = CONFIG_PATHS + [self.analysis_config]
 
-        config = {}
+        self.configs = []
+
 
         for path in paths_to_load:
             print(f'Loading... {path}\n')
             with open(path, 'r') as f:
                 self.this_config = yaml.safe_load(f)
 
-            config.update(self.this_config)
-
-            print(f'{self.this_config} \n')
+            self.configs.append(self.this_config)
+        
+        print('List of all Configuration Files\n')
+        print(f'{self.configs}\n')
 
 
     def load_data(self):
@@ -76,8 +78,6 @@ class Analysis:
         None
 
         '''
-        
-        print(f'{self.this_config} \n')
 
         #we retrieve our github api token from our config file and set its value to a unique variable
         token = self.this_config.get('github_api_token')
@@ -113,27 +113,43 @@ class Analysis:
             file_content = base64.b64decode(response_json['content']).decode()
         
         print(file_content)
+        print(type(file_content))
         print(token)
-
-        return response_json
-        # print(self.analysis_config['github_api_token'])
     
+
+    def compute_analysis(self):
+    
+        '''Analyze previously-loaded data.
+
+        This function calculates the mean value for the figure size detailed in each of the configuration files
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        analysis_output : int
+
+        '''
+        
+        list_of_configs = self.configs
+        sum_of_all_figure_size = 0 
+
+        for config in list_of_configs:
+            print(f'{config}+\n')
+            sum_of_all_figure_size += config['figure_size']
+
+        mean_value_of_figure_size = sum_of_all_figure_size/len(list_of_configs)
+        
+        
+        print(mean_value_of_figure_size)
+        return mean_value_of_figure_size
+
+
 
 obj_1 = Analysis()
 obj_1.load_data()
-    # def compute_analysis() -> Any:
+obj_1.compute_analysis()
 
-    # '''Analyze previously-loaded data.
 
-    # This function runs an analytical measure of your choice (mean, median, linear regression, etc...)
-    # and returns the data in a format of your choice.
-
-    # Parameters
-    # ----------
-    # None
-
-    # Returns
-    # -------
-    # analysis_output : Any
-
-    # '''
