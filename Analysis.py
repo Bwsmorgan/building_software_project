@@ -142,7 +142,6 @@ class Analysis:
 
         mean_value_of_figure_size = sum_of_all_figure_size/len(list_of_configs)
         
-        
         print(mean_value_of_figure_size)
         return mean_value_of_figure_size
 
