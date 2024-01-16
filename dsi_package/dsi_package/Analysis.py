@@ -147,8 +147,8 @@ class Analysis:
 
 
 
-obj_1 = Analysis()
-obj_1.load_data()
-obj_1.compute_analysis()
+# obj_1 = Analysis()
+# obj_1.load_data()
+# obj_1.compute_analysis()
 
 
